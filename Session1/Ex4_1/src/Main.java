@@ -148,7 +148,7 @@ public class Main {
             }
             // player đứng dưới enemy1 và di chuyển lên trên
             else if (dy <0){
-                if ( enemies[1][1]< player[0] && player[0]== enemies[1][0]&& enemies[1][1] + speed_enemies[1][1] > player[1] + dy ){
+                if ( enemies[1][1]< player[1] && player[0]== enemies[1][0]&& enemies[1][1] + speed_enemies[1][1] > player[1] + dy ){
                     player[1] = enemies[1][1];
                     pass = true;
                 }
