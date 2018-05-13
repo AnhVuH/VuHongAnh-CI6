@@ -113,7 +113,6 @@ public class Main {
                 break;
             }
 
-
             // điều khiển player
             Scanner scanner = new Scanner(System.in);
             String move = scanner.next();
@@ -160,8 +159,6 @@ public class Main {
                 move_char(enemies[0],speed_enemies[0][0],speed_enemies[0][1],map_size); // enemy 0 di tu trai sang phai, enemy 1 di tu tren xuong duoi
                 move_char(enemies[1],speed_enemies[1][0],speed_enemies[1][1],map_size);
             }
-
-
         }
     }
 
