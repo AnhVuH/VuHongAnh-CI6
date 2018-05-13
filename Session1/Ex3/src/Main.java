@@ -4,35 +4,36 @@ public class Main {
     public static void main(String[] args) {
         int map_size = 4;
         int[][] enemies = new int[2][2]; // 2 enemy x 2 toa do x,y
+        int[] enemy = new int[2];
         int[][] speed_enemies = {{1,0},{0,1}}; // enemy 0 di tu trai sang phai, enemy 1 di tu tren xuong duoi
 
-
         int[] player = {3,2};
-        boolean is_p, is_e, is_g;
+        boolean is_p, is_e;
         int dx,dy;
 
 
-        List<int[]> filled_pos = new ArrayList<>(); // luu ca vi tri da co character
+        List<int[]> filled_pos = new ArrayList<>();
         filled_pos.add(player);
 
-        Random random= new Random();
-        // random vi tri 2 enemy
 
+        Random random= new Random();
         int num_enemies = 0;
-        int[] enemy = new int[2];
         while (num_enemies <enemies.length){
             enemy[0] = random.nextInt(4);
             enemy[1] = random.nextInt(4);
-
+//            System.out.println("new enemy x" + enemy[0]);
+//            System.out.println("new enemy y" + enemy[1]);
             boolean same = false;
-            for (int[] pos:filled_pos) {
 
+            for (int[] pos:filled_pos) {
+//                System.out.println(pos[0]);
+//                System.out.println(pos[1]);
                 if(Arrays.equals(enemy,pos)){
                     same = true;
                     break;
                 }
             }
-
+//            System.out.println("same after"+same);
             if (!same){
                 int[] new_enemy = {enemy[0],enemy[1]};
                 // nếu ko tạo biến mới add thẳng enemy vào filled_pos thì vòng lặp sau enemy đã add lấy giá trị của enemy mới
@@ -46,34 +47,16 @@ public class Main {
 
         }
 
-        // random vi tri hop qua
-
-        int [] gift = new int[2];
-        while(true){
-            gift[0] = random.nextInt(4);
-            gift[1] = random.nextInt(4);
-            boolean same = false;
-            for (int[]pos: filled_pos){
-                if(Arrays.equals(pos, gift)){
-                    same =true;
-                    break;
-                }
-            }
-            if(!same){
-                break;
-            }
-        }
-
-
         boolean end_game = false;
 
         while(true){
+
             //hiển thị map
             for (int i = 0; i < map_size; i++){
                 for (int j = 0; j< map_size; j++){
                     is_p = false;
                     is_e = false;
-                    is_g = false;
+
                     for (int[] enemy_pos: enemies) {
                         if(enemy_pos[0]==j && enemy_pos[1]==i){
                             System.out.print("X");
@@ -86,11 +69,7 @@ public class Main {
                         System.out.print("P");
                         is_p = true;
                     }
-                    if (gift[1] == i && gift[0]==j && !is_e && !is_p){
-                        System.out.print("G");
-                        is_g = true;
-                    }
-                    if (!is_p && !is_e&& !is_g){
+                    if (!is_p && !is_e){
                         System.out.print("*");
                     }
                 }
@@ -105,15 +84,10 @@ public class Main {
                     break;
                 }
             }
+
             if(end_game){
                 break;
             }
-            if (player[0]== gift[0]&& player[1]==gift[1]){
-                System.out.println("you win!!!");
-                break;
-            }
-
-
 
 
             // điều khiển player
