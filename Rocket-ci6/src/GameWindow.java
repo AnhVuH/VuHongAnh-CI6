@@ -37,11 +37,11 @@ public class GameWindow extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()== KeyEvent.VK_LEFT){
 //                    gameCanvas.positionXPlayer -= 10;
-                    gameCanvas.player.run("left");
+                    gameCanvas.player.run("left",1024,600);
                 }
                 if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 //                    gameCanvas.positionXPlayer += 10;
-                    gameCanvas.player.run("right");
+                    gameCanvas.player.run("right",1024,600);
                 }
             }
 

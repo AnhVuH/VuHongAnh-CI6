@@ -22,29 +22,63 @@ public class Enemy {
         this.velocityY = velocityY;
     }
 
-    public void run(int windowWidth, int windowHeight){
-        if(this.x + this.velocityX ==0){
-            this.x =windowWidth;
+    public void run(int windowWidth, int windowHeight,int playerPosX, int playerPosY){
+        boolean outX= false, outY= false;
+        this.chase(playerPosX, playerPosY);
+
+        if(this.x + this.velocityX <=0){
+            this.x = windowWidth;
+            outX = true;
         }
-        else if(this.x + this.velocityX ==windowWidth){
+        else if(this.x + this.velocityX >= windowWidth){
             this.x =0;
-
-        }
-        else{
-            this.x += this.velocityX;
+            outX = true;
         }
 
-        if(this.y + this.velocityY ==0){
+        if(this.y + this.velocityY <=0){
             this.y = windowHeight;
+            outY = true;
         }
-        else if(this.y +this.velocityY == windowHeight){
+        else if(this.y +this.velocityY >= windowHeight){
             this.y =0;
+            outY = true;
+        }
+
+        if(!outX && !outY){
+            this.x += this.velocityX;
+            this.y += this.velocityY;
+        }
+        else if (outX && !outY){
+            this.y = rand.nextInt(windowHeight);
+        }
+        else if(outY && !outX){
+            this.x = rand.nextInt(windowWidth);
+        }
+
+
+
+    }
+    public void chase(int playerPosX, int playerPosY){
+        if(playerPosX == this.x && playerPosY ==this.y){
+            this.velocityX =0;
+            this.velocityY =0;
+        }
+        else if(playerPosX == this.x){
+            this.velocityX =0;
+            this.velocityY = (playerPosY - this.y)/Math.abs(playerPosY - this.y) *(rand.nextInt(2) +2);
+        }
+        else if(playerPosY == this.y){
+            this.velocityY =0;
+            this.velocityX = (playerPosX - this.x)/Math.abs(playerPosX - this.x) *(rand.nextInt(2) +2);
         }
         else{
-            this.y += this.velocityY;
+            this.velocityY = (playerPosY - this.y)/Math.abs(playerPosY - this.y) *(rand.nextInt(2) +2);
+            this.velocityX = (playerPosX - this.x)/Math.abs(playerPosX - this.x) *(rand.nextInt(2) +2);
         }
 
     }
+
+
 
     public void render(Graphics graphics){
         graphics.drawImage(this.image, this.x, this.y,this.width,this.height,null);

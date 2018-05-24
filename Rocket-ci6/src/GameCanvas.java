@@ -25,9 +25,9 @@ public class GameCanvas extends JPanel {
     private int countStar =0;
     private int countEnemy =0;
 
-
-    public int positionXPlayer= 400;
-    public int positionYPlayer = 200;
+//
+//    public int positionXPlayer= 400;
+//    public int positionYPlayer = 200;
 
     public GameCanvas()  {
         this.setSize(1024, 600);
@@ -44,8 +44,8 @@ public class GameCanvas extends JPanel {
 
     private void setupCharacter(){
         this.player = new Player(this.loadImage("resources-rocket/resources/images/circle.png"),
-                positionXPlayer,
-                positionYPlayer,
+                this.random.nextInt(1024),
+                this.random.nextInt(600),
                 30,
                 30,10);
 
@@ -85,7 +85,7 @@ public class GameCanvas extends JPanel {
         this.createEnemy();
 
         this.stars.forEach(star -> star.run());
-        this.enemies.forEach(enemy -> enemy.run(1024,600));
+        this.enemies.forEach(enemy -> enemy.run(1024,600, this.player.x, this.player.y));
 
 
     }
@@ -111,10 +111,10 @@ public class GameCanvas extends JPanel {
         veloX = 0;
         veloY = 0;
         while(veloX==0 && veloY==0){
-            veloX = this.random.nextInt(4)-2;
-            veloY = this.random.nextInt(4)-2;
+            veloX = this.random.nextInt(10)-5;
+            veloY = this.random.nextInt(10)-5;
         }
-        if(this.countEnemy==100){
+        if(this.countEnemy==500 ){
             Enemy enemy = new Enemy(this.loadImage("resources-rocket/resources/images/circle.png"),
                     this.random.nextInt(800),
                     this.random.nextInt(600),
@@ -123,7 +123,8 @@ public class GameCanvas extends JPanel {
                     veloX,
                     veloY);
             this.enemies.add(enemy);
-            this.countEnemy =101;
+//            this.countEnemy =101;
+            this.countEnemy =0;
         }
         else{
             this.countEnemy +=1;
