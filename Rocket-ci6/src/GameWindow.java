@@ -37,12 +37,14 @@ public class GameWindow extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()== KeyEvent.VK_LEFT){
 //                    gameCanvas.player.velocity.x = -10;
-                    gameCanvas.player.changeDicretion(-20);
+//                    gameCanvas.player.changeDicretion(-20);
+                    gameCanvas.player.angle =-10;
 
                 }
                 if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 //                    gameCanvas.player.velocity.x = 10;
-                    gameCanvas.player.changeDicretion(20);
+//                    gameCanvas.player.changeDicretion(20);
+                    gameCanvas.player.angle =10;
 
 
                 }
@@ -52,14 +54,16 @@ public class GameWindow extends JFrame {
             public void keyReleased(KeyEvent e) {
                 if(e.getKeyCode()== KeyEvent.VK_LEFT){
 //                    gameCanvas.player.velocity.x = 0;
-                    gameCanvas.player.changeDicretion(0);
+//                    gameCanvas.player.changeDicretion(0);
+                    gameCanvas.player.angle =0;
 
 
 
                 }
                 if(e.getKeyCode()== KeyEvent.VK_RIGHT){
 //                    gameCanvas.player.velocity.x = 0;
-                    gameCanvas.player.changeDicretion(0);
+//                    gameCanvas.player.changeDicretion(0);
+                    gameCanvas.player.angle =0;
 
                 }
             }

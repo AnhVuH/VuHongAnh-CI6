@@ -45,8 +45,9 @@ public class GameCanvas extends JPanel {
 
     private void setupCharacter(){
         this.background = new Background(0,0,1024,600,Color.BLACK);
-        this.player = new Player();
+        this.player = new Player(this.loadImage("resources-rocket/resources/images/circle.png"));
         this.player.position.set(500,300);
+//        this.player.setVerties();
 
 
         this.setupStar();

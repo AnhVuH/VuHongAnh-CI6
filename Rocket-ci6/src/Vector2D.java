@@ -35,7 +35,7 @@ public class Vector2D {
     }
 
     public Vector2D add(Vector2D vector2D){
-        return this.add(vector2D.x + x, vector2D.y + y);
+        return this.add(vector2D.x, vector2D.y );
 
     }
 
@@ -46,7 +46,7 @@ public class Vector2D {
     }
 
     public Vector2D subtractBy(Vector2D vector2D){
-        return this.addUp(vector2D.x, vector2D.y);
+        return this.subtractBy(vector2D.x, vector2D.y);
     }
     public Vector2D subtract(float x, float y){
         return new Vector2D(this.x-x, this.y-y);
