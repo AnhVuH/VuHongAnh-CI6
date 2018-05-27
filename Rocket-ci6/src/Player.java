@@ -1,44 +1,69 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Player {
-    public BufferedImage image;
-    public int x,y;
-    public int width, height;
-    public int velocityX;
-    Random rand = new Random();
 
-    public Player(BufferedImage image, int x, int y, int width, int height, int velocityX) {
-        this.image = image;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.velocityX = velocityX;
+    public Vector2D position;
+    public Vector2D velocity;
+    public Vector2D center;
+    private Random random;
+    private List<Vector2D> verties;
+    private Polygon polygon;
+
+
+    public Player() {
+        this.position = new Vector2D();
+        this.velocity = new Vector2D(3,0);
+        this.random = new Random();
+        this.polygon = new Polygon();
     }
 
-    public void run(String direction, int windowWidth, int windowHeight) {
-        int dX = 0;
-        if (direction.equalsIgnoreCase("left")) {
-            dX -= this.velocityX;
-        } else if (direction.equalsIgnoreCase("right")) {
-            dX += this.velocityX;
+    public void run() {
+        this.position.addUp(this.velocity);
+        this.backtoScreen ();
+    }
+
+    public void changeDicretion(double angle){
+        this.velocity = this.velocity.rotate(angle);
+        this.verties.forEach(vertex-> vertex = vertex.rotate(angle));
+    }
+
+
+    private void backtoScreen(){
+        if(this.position.x >1024){
+            this.position.set(0, this.random.nextInt(600));
         }
 
-        if (this.x + dX <= 0) {
-            this.x = windowWidth;
-            this.y = rand.nextInt(windowHeight)-30;
-
-        } else if (this.x + dX >= windowWidth) {
-            this.x = 0;
-            this.y = rand.nextInt(windowHeight)-30;
-        } else {
-            this.x += dX;
+        if(this.position.x <0){
+            this.position.set(1024, this.random.nextInt(600));
+        }
+        if(this.position.y >600){
+            this.position.set(this.random.nextInt(1024),0);
+        }
+        if(this.position.y <0){
+            this.position.set(this.random.nextInt(1024),600);
         }
 
     }
-        public void render(Graphics graphics){
-        graphics.drawImage(this.image,this.x, this.y, this.width, this.height, null);
+    private void setVerties(){
+        // tam giac can chieu cao 21, canh day 10
+        this.center = this.position.copy();
+        this.verties = Arrays.asList(
+                new Vector2D(this.center.x-7, this.center.y-5),
+                new Vector2D(this.center.x-7 ,this.center.y+5),
+                new Vector2D(this.center.x+ 14,this.center.y)
+        );
+    }
+
+
+    public void render(Graphics graphics){
+        graphics.setColor(Color.RED);
+        this.polygon.reset();
+        this.setVerties();
+        this.verties.forEach(vertex -> polygon.addPoint((int)vertex.x, (int)vertex.y));
+        graphics.fillPolygon(this.polygon);
     }
 }

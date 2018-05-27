@@ -36,18 +36,32 @@ public class GameWindow extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()== KeyEvent.VK_LEFT){
-//                    gameCanvas.positionXPlayer -= 10;
-                    gameCanvas.player.run("left",1024,600);
+//                    gameCanvas.player.velocity.x = -10;
+                    gameCanvas.player.changeDicretion(-20);
+
                 }
                 if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-//                    gameCanvas.positionXPlayer += 10;
-                    gameCanvas.player.run("right",1024,600);
+//                    gameCanvas.player.velocity.x = 10;
+                    gameCanvas.player.changeDicretion(20);
+
+
                 }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode()== KeyEvent.VK_LEFT){
+//                    gameCanvas.player.velocity.x = 0;
+                    gameCanvas.player.changeDicretion(0);
 
+
+
+                }
+                if(e.getKeyCode()== KeyEvent.VK_RIGHT){
+//                    gameCanvas.player.velocity.x = 0;
+                    gameCanvas.player.changeDicretion(0);
+
+                }
             }
         });
 
@@ -66,7 +80,6 @@ public class GameWindow extends JFrame {
         while(true){
             long currentTime = System.nanoTime();
             if (currentTime - this.lastTime >= 17_000_000){
-
                 this.gameCanvas.runAll();
                 this.gameCanvas.renderAll();
                 this.lastTime = currentTime;
