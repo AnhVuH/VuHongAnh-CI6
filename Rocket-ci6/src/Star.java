@@ -9,8 +9,6 @@ public class Star {
 
 
     //constructor
-
-
     public Star(BufferedImage image, Vector2D position, int width, int height, Vector2D velocity) {
         this.image = image;
         this.position = position;

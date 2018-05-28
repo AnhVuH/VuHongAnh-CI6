@@ -25,14 +25,9 @@ public class GameCanvas extends JPanel {
     private int countEnemy =0;
 
 
-
-
-//    public int positionXPlayer= 400;
-//    public int positionYPlayer = 200;
-
     public GameCanvas()  {
         this.setSize(1024, 600);
-        //load image
+
         this.setupCharacter();
         this.setupBackbuffered();
         this.setVisible(true);
@@ -45,9 +40,9 @@ public class GameCanvas extends JPanel {
 
     private void setupCharacter(){
         this.background = new Background(0,0,1024,600,Color.BLACK);
-        this.player = new Player(this.loadImage("resources-rocket/resources/images/circle.png"));
+        this.player = new Player();
         this.player.position.set(500,300);
-//        this.player.setVerties();
+
 
 
         this.setupStar();
