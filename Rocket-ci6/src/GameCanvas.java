@@ -19,15 +19,21 @@ public class GameCanvas extends JPanel {
     Background background;
     List<Star> stars;
     List<Enemy>  enemies;
+    //
+    EnemyAttack enemyAttack;
+
     Player player;
+
+
     private Random random = new Random();
     private int countStar =0;
     private int countEnemy =0;
 
 
+
     public GameCanvas()  {
         this.setSize(1024, 600);
-
+        //load image
         this.setupCharacter();
         this.setupBackbuffered();
         this.setVisible(true);
@@ -39,15 +45,30 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupCharacter(){
-        this.background = new Background(0,0,1024,600,Color.BLACK);
-        this.player = new Player();
-        this.player.position.set(500,300);
+        this.background = new Background();
+        //
+        this.setupEnemyAttack();
 
-
+        this.setupPlayer();
 
         this.setupStar();
         this.setupEnemy();
     }
+
+
+    private  void setupEnemyAttack(){
+        this.enemyAttack = new EnemyAttack();
+        this.enemyAttack.position.set(random.nextInt(1024),random.nextInt(600));
+        this.enemyAttack.velocity.set(4,0);
+    }
+
+
+    private  void setupPlayer(){
+        this.player = new Player();
+        this.player.position.set(500,300);
+        this.player.velocity.set(4,0);
+    }
+
 
     private void setupStar(){
         this.stars = new ArrayList<>();
@@ -69,52 +90,53 @@ public class GameCanvas extends JPanel {
         this.enemies.forEach(enemy -> enemy.render(graphics));
 
         this.player.render(graphics);
+        //
+        this.enemyAttack.render(graphics);
+
         this.repaint();
     }
 
 
     public void runAll(){
         this.createStar();
-        this.createEnemy();
         this.stars.forEach(star -> star.run());
-        this.enemies.forEach(enemy -> enemy.run(this.player.position));
+        this.createEnemy();
+        this.enemies.forEach(enemy -> {
+            Vector2D velocity = player.position.subtract(enemy.position).normalize()
+                    .multiply(2);
+            enemy.velocity.set(velocity);
+        });
+
+        Vector2D velocity = player.position.subtract(enemyAttack.position).normalize()
+                .multiply(2);
+        this.enemyAttack.velocity.set(velocity);
+
+        this.enemyAttack.run();
+
+
+
+        this.enemies.forEach(enemy -> enemy.run());
         this.player.run();
 
     }
 
     private  void createStar(){
         if(this.countStar==30){
-            Star star = new Star(this.loadImage("resources-rocket/resources/images/star.png"),
-                    new Vector2D(1024,this.random.nextInt(600)),
-                    5,
-                    5,
-                    new Vector2D(-this.random.nextInt(3)-1,0));
+            Star star = new Star();
+            star.position.set(1024,this.random.nextInt(600));
+            star.velocity.set(-(this.random.nextInt(3)+1),0);
 
             this.stars.add(star);
             this.countStar =0;
         }else{
             this.countStar +=1;
         }
-
     }
     private void createEnemy(){
-        if(this.countEnemy==200){
-            int dau = this.random.nextInt(2);
-            if(dau==0) dau =-1;
-            else dau = 1;
-            int velocityX= dau *(this.random.nextInt(4)+1);
+        if(this.countEnemy==500){
 
-            dau= this.random.nextInt(2);
-            if(dau==0) dau =-1;
-            else dau = 1;
-            int velocityY= dau *(this.random.nextInt(4)+1);
-
-            Enemy enemy = new Enemy(this.loadImage("resources-rocket/resources/images/circle.png"),
-                    new Vector2D(this.random.nextInt(1024),this.random.nextInt(600)),
-                    20,
-                    20,
-                    new Vector2D(velocityX, velocityY)
-            );
+            Enemy enemy = new Enemy();
+            enemy.position.set(this.random.nextInt(1024),this.random.nextInt(600));
             this.enemies.add(enemy);
             this.countEnemy =0;
         }
