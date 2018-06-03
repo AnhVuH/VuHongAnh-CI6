@@ -19,11 +19,10 @@ public class GameCanvas extends JPanel {
     Background background;
     List<Star> stars;
     List<Enemy>  enemies;
-    //
+
     SpecialEnemy specialEnemy;
 
     Player player;
-
 
     private Random random = new Random();
     private int countStar =0;
