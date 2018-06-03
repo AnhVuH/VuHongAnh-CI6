@@ -1,22 +1,24 @@
 import java.awt.*;
 
-public class BulletEnemy {
-    public Vector2D position;
+public class BulletEnemy extends GameObject{
+
     public Vector2D velocity;
-    private ImageRenderer renderer;
+
 
     //constructor
     public BulletEnemy(){
-        this.position = new Vector2D();
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png",6,6);
     }
 
+    @Override
     public void run(){
+        super.run();
         this.position.addUp(this.velocity);
     }
 
+    @Override
     public void render(Graphics graphics){
-        this.renderer.render(graphics,this.position);
+        super.render(graphics);
     }
 }

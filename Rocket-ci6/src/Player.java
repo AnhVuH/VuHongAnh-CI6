@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class Player {
+public class Player extends GameObject{
 
-    public Vector2D position;
+
     public PlayerMove playerMove;
-    private Renderer renderer;
+
     private PlayerShoot playerShoot;
 
 
     public Player() {
-        this.position = new Vector2D();
+
         this.renderer = new PolygonRenderer(
                 Color.RED,
                 new Vector2D(),
@@ -26,19 +26,19 @@ public class Player {
         this.playerShoot = new PlayerShoot();
     }
 
-    public void run() {
-        this.playerMove.run(this);
 
+    @Override
+    public void run() {
+        super.run();
+        this.playerMove.run(this);
         this.playerShoot.run(this);
         this.playerShoot.bulletsPlayer.forEach(bulletPlayer -> bulletPlayer.run());
         ((PolygonRenderer)(this.renderer)).angle = this.playerMove.angle;
     }
 
-
-
-
+    @Override
     public void render(Graphics graphics) {
-        this.renderer.render(graphics,position);
+        super.render(graphics);
         this.playerShoot.bulletsPlayer.forEach(bulletPlayer -> bulletPlayer.render(graphics));
     }
 

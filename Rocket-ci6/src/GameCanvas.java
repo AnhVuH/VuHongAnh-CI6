@@ -12,14 +12,11 @@ import java.util.Random;
 public class GameCanvas extends JPanel {
 
 
-    BufferedImage playerImage;
     BufferedImage backBuffered;
-
     Graphics graphics;
     Background background;
     List<Star> stars;
     List<Enemy>  enemies;
-
     SpecialEnemy specialEnemy;
 
     Player player;
@@ -65,7 +62,7 @@ public class GameCanvas extends JPanel {
     private  void setupPlayer(){
         this.player = new Player();
         this.player.position.set(500,300);
-        this.player.velocity.set(4,0);
+        this.player.playerMove.velocity.set(4,0);
     }
 
 
@@ -84,12 +81,9 @@ public class GameCanvas extends JPanel {
 
     public void renderAll(){
         this.background.render(graphics);
-
         this.stars.forEach(star -> star.render(graphics));
         this.enemies.forEach(enemy -> enemy.render(graphics));
-
         this.player.render(graphics);
-        //
         this.specialEnemy.render(graphics);
 
         this.repaint();
@@ -145,12 +139,4 @@ public class GameCanvas extends JPanel {
     }
 
 
-    private BufferedImage loadImage(String path){
-        try{
-            return ImageIO.read(new File(path));
-        }catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
