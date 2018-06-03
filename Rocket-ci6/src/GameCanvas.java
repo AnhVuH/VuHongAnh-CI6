@@ -20,7 +20,7 @@ public class GameCanvas extends JPanel {
     List<Star> stars;
     List<Enemy>  enemies;
     //
-    EnemyAttack enemyAttack;
+    SpecialEnemy specialEnemy;
 
     Player player;
 
@@ -57,9 +57,9 @@ public class GameCanvas extends JPanel {
 
 
     private  void setupEnemyAttack(){
-        this.enemyAttack = new EnemyAttack();
-        this.enemyAttack.position.set(random.nextInt(1024),random.nextInt(600));
-        this.enemyAttack.velocity.set(4,0);
+        this.specialEnemy = new SpecialEnemy();
+        this.specialEnemy.position.set(random.nextInt(1024),random.nextInt(600));
+        this.specialEnemy.velocity.set(4,0);
     }
 
 
@@ -91,7 +91,7 @@ public class GameCanvas extends JPanel {
 
         this.player.render(graphics);
         //
-        this.enemyAttack.render(graphics);
+        this.specialEnemy.render(graphics);
 
         this.repaint();
     }
@@ -107,11 +107,11 @@ public class GameCanvas extends JPanel {
             enemy.velocity.set(velocity);
         });
 
-        Vector2D velocity = player.position.subtract(enemyAttack.position).normalize()
+        Vector2D velocity = player.position.subtract(specialEnemy.position).normalize()
                 .multiply(2);
-        this.enemyAttack.velocity.set(velocity);
+        this.specialEnemy.velocity.set(velocity);
 
-        this.enemyAttack.run();
+        this.specialEnemy.run();
 
 
 

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class BackgroundRenderer {
+public class BackgroundRenderer implements Renderer{
     private Color color;
     private int width;
     private int height;

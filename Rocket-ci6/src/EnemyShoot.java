@@ -11,7 +11,7 @@ public class EnemyShoot {
         this.bulletEnemies = new ArrayList<>();
     }
 
-    public void run(EnemyAttack enemy){
+    public void run(SpecialEnemy enemy){
 
         if(countBullet ==200){
             for(int i=0; i<12 ; i++){

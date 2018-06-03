@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class PolygonRenderer {
+public class PolygonRenderer implements Renderer{
     private List<Vector2D> verties;
     private Polygon polygon;
     public double angle =0.0;

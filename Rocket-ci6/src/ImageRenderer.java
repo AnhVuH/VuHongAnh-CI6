@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageRenderer {
+public class ImageRenderer implements Renderer{
     private BufferedImage image;
     private int width;
     private int height;
