@@ -1,3 +1,7 @@
+package renderer;
+
+import base.Vector2D;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +12,7 @@ public class PolygonRenderer implements Renderer{
     public double angle =0.0;
     private Color color;
 
-    public PolygonRenderer(Color color, Vector2D... verties){ //Vector2D[] luon o cuoi cung
+    public PolygonRenderer(Color color, Vector2D... verties){ //base.Vector2D[] luon o cuoi cung
         this.verties = Arrays.asList(verties);
         this.color = color;
         this.polygon = new Polygon();
