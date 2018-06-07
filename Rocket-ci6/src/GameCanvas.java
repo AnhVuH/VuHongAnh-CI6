@@ -1,6 +1,7 @@
 import base.GameObjectManager;
 import game.background.Background;
 import game.enemy.EnemySpawner;
+import game.enemy.SpecialEnemy;
 import game.player.Player;
 import game.star.StarSpawner;
 import input.KeyboardInput;
@@ -38,12 +39,11 @@ public class GameCanvas extends JPanel {
     private void setupCharacter(){
         GameObjectManager.instance.add(new Background());
 
-
         this.setupPlayer();
         GameObjectManager.instance.add(new StarSpawner());
         GameObjectManager.instance.add(new EnemySpawner());
+        GameObjectManager.instance.add(new SpecialEnemy());
     }
-
 
 
 
