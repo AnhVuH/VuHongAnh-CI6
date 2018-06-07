@@ -1,12 +1,15 @@
 package game.player;
 
 import base.GameObject;
+import base.GameObjectManager;
 import base.Vector2D;
+import physic.BoxCollider;
 import renderer.PolygonRenderer;
 
 import java.awt.*;
 
 public class Player extends GameObject {
+    public BoxCollider boxCollider;
 
     public PlayerMove playerMove;
 
@@ -21,6 +24,7 @@ public class Player extends GameObject {
         );
         this.playerMove = new PlayerMove();
         this.playerShoot = new PlayerShoot();
+        this.boxCollider = new BoxCollider(20,16);
     }
 
 
@@ -28,6 +32,12 @@ public class Player extends GameObject {
     public void run() {
         super.run();
         this.playerMove.run(this);
+        this.boxCollider.position.set(this.position.x,this.position.y);
+        if(GameObjectManager.instance.checkCollision(this) !=null)
+        {
+            GameObjectManager.instance.checkCollision(this).isAlive =false;
+            this.isAlive =false;
+        }
         this.playerShoot.run(this);
 
         ((PolygonRenderer)(this.renderer)).angle = this.playerMove.angle;

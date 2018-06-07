@@ -1,5 +1,6 @@
 package game.bullet;
 
+
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
@@ -26,11 +27,18 @@ public class BulletPlayer extends GameObject {
         super.run();
         this.position.addUp(this.velocity);
         this.boxCollider.position.set(this.position.x - 3, this.position.y - 3);
-        Enemy enemy = GameObjectManager.instance.checkCollision(this);
-        if (enemy != null) {
-            enemy.isAlive = false;
-            this.isAlive = false;
+        if(GameObjectManager.instance.checkCollision(this) !=null)
+        {
+            GameObjectManager.instance.checkCollision(this).isAlive =false;
+            this.isAlive =false;
         }
+
+//        Enemy enemy = GameObjectManager.instance.checkCollision(this);
+//
+//        if (enemy != null) {
+//            enemy.isAlive = false;
+//            this.isAlive = false;
+//        }
 
     }
 }

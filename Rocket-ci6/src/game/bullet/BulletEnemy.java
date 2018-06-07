@@ -24,6 +24,7 @@ public class BulletEnemy extends GameObject {
     public void run(){
         super.run();
         this.position.addUp(this.velocity);
+        this.boxCollider.position.set(this.position.x - 3, this.position.y - 3);
     }
 
 }

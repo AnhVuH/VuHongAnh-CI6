@@ -9,11 +9,12 @@ import renderer.ImageRenderer;
 
 import java.util.Random;
 
-public class SpecialEnemy extends GameObject {
+public class SpecialEnemy extends Enemy {
     public Vector2D velocity;
     public BoxCollider boxCollider;
     private Random random;
     private game.enemy.EnemyShoot enemyShoot;
+
 
     //constructor
     public SpecialEnemy(){
@@ -26,7 +27,7 @@ public class SpecialEnemy extends GameObject {
 
     @Override
     public void run(){
-        super.run();
+//        super.run();
         this.position.addUp(this.velocity);
         this.enemyShoot.run(this);
         this.boxCollider.position.set(this.position.x-10,this.position.y-10);

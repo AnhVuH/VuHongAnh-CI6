@@ -13,7 +13,7 @@ public class EnemyShoot {
         this.frameCounter = new FrameCounter(200);
     }
 
-    public void run(SpecialEnemy enemy){
+    public void run(Enemy enemy){
 
         if(this.frameCounter.run()){
             for(int angle=0; angle<360; angle+=30){
