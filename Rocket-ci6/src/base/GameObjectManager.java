@@ -69,8 +69,14 @@ public class GameObjectManager {
 //                .orElse(null);
 //    }
 
-//   
-    public Stream<GameObject> findObjectAlive(Class className){
+//
+
+
+
+
+
+
+        public Stream<GameObject> findObjectAlive(Class className){
         return this.list.stream()
                 .filter(gameObject -> gameObject.isAlive)
                 .filter(gameObject -> gameObject.getClass()== className);
@@ -161,8 +167,6 @@ public class GameObjectManager {
 
     }
 
-
-
-
+    
 
 }
