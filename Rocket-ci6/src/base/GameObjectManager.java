@@ -10,8 +10,10 @@ import physic.BoxCollider;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class GameObjectManager {
+
 
     public static GameObjectManager instance = new GameObjectManager();
 
@@ -66,23 +68,30 @@ public class GameObjectManager {
 //                .findFirst()
 //                .orElse(null);
 //    }
-    
+
+//   
+    public Stream<GameObject> findObjectAlive(Class className){
+        return this.list.stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .filter(gameObject -> gameObject.getClass()== className);
+
+    }
+
     public GameObject checkCollision(GameObject gameObjectCollied){
+
+
+
         if (gameObjectCollied instanceof BulletPlayer) {
-            Enemy enemy = (Enemy)this.list
-                    .stream()
-                    .filter(gameObject -> gameObject.isAlive)
-                    .filter(gameObject -> gameObject instanceof Enemy)
+
+            Enemy enemy = (Enemy)this.findObjectAlive(Enemy.class)
                     .filter(gameObject -> {
                         BoxCollider other = ((Enemy) gameObject).boxCollider;
                         return ((BulletPlayer)gameObjectCollied).boxCollider.checkBoxCollider(other);
                     })
                     .findFirst()
                     .orElse(null);
-            SpecialEnemy specialEnemy = (SpecialEnemy)this.list
-                    .stream()
-                    .filter(gameObject -> gameObject.isAlive)
-                    .filter(gameObject -> gameObject instanceof SpecialEnemy)
+
+            SpecialEnemy specialEnemy = (SpecialEnemy)this.findObjectAlive(SpecialEnemy.class)
                     .filter(gameObject -> {
                         BoxCollider other = ((SpecialEnemy) gameObject).boxCollider;
                         return ((BulletPlayer)gameObjectCollied).boxCollider.checkBoxCollider(other);
@@ -90,10 +99,7 @@ public class GameObjectManager {
                     .findFirst()
                     .orElse(null);
 
-            BulletEnemy bulletEnemy = (BulletEnemy) this.list
-                    .stream()
-                    .filter(gameObject -> gameObject.isAlive)
-                    .filter(gameObject -> gameObject instanceof BulletEnemy)
+            BulletEnemy bulletEnemy = (BulletEnemy)this.findObjectAlive(BulletEnemy.class)
                     .filter(gameObject -> {
                         BoxCollider other = ((BulletEnemy) gameObject).boxCollider;
                         return ((BulletPlayer)gameObjectCollied).boxCollider.checkBoxCollider(other);
@@ -114,10 +120,8 @@ public class GameObjectManager {
         }
 
         else if (gameObjectCollied instanceof Player) {
-            Enemy enemy = (Enemy)this.list
-                    .stream()
-                    .filter(gameObject -> gameObject.isAlive)
-                    .filter(gameObject -> gameObject instanceof Enemy)
+
+            Enemy enemy = (Enemy)this.findObjectAlive(Enemy.class)
                     .filter(gameObject -> {
                         BoxCollider other = ((Enemy) gameObject).boxCollider;
                         return ((Player)gameObjectCollied).boxCollider.checkBoxCollider(other);
@@ -125,10 +129,7 @@ public class GameObjectManager {
                     .findFirst()
                     .orElse(null);
 
-            SpecialEnemy specialEnemy = (SpecialEnemy)this.list
-                    .stream()
-                    .filter(gameObject -> gameObject.isAlive)
-                    .filter(gameObject -> gameObject instanceof SpecialEnemy)
+            SpecialEnemy specialEnemy = (SpecialEnemy)this.findObjectAlive(SpecialEnemy.class)
                     .filter(gameObject -> {
                         BoxCollider other = ((SpecialEnemy) gameObject).boxCollider;
                         return ((Player)gameObjectCollied).boxCollider.checkBoxCollider(other);
@@ -136,10 +137,7 @@ public class GameObjectManager {
                     .findFirst()
                     .orElse(null);
 
-            BulletEnemy bulletEnemy = (BulletEnemy) this.list
-                    .stream()
-                    .filter(gameObject -> gameObject.isAlive)
-                    .filter(gameObject -> gameObject instanceof BulletEnemy)
+            BulletEnemy bulletEnemy = (BulletEnemy) this.findObjectAlive(BulletEnemy.class)
                     .filter(gameObject -> {
                         BoxCollider other = ((BulletEnemy) gameObject).boxCollider;
                         return ((Player)gameObjectCollied).boxCollider.checkBoxCollider(other);
@@ -162,6 +160,8 @@ public class GameObjectManager {
         else return null;
 
     }
+
+
 
 
 

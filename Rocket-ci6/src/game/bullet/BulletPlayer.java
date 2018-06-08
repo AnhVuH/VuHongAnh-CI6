@@ -27,18 +27,13 @@ public class BulletPlayer extends GameObject {
         super.run();
         this.position.addUp(this.velocity);
         this.boxCollider.position.set(this.position.x - 3, this.position.y - 3);
-        if(GameObjectManager.instance.checkCollision(this) !=null)
+        GameObject collider = GameObjectManager.instance.checkCollision(this);
+        if(collider !=null)
         {
-            GameObjectManager.instance.checkCollision(this).isAlive =false;
+            collider.isAlive =false;
             this.isAlive =false;
         }
 
-//        Enemy enemy = GameObjectManager.instance.checkCollision(this);
-//
-//        if (enemy != null) {
-//            enemy.isAlive = false;
-//            this.isAlive = false;
-//        }
 
     }
 }

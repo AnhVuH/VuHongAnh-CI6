@@ -33,9 +33,10 @@ public class Player extends GameObject {
         super.run();
         this.playerMove.run(this);
         this.boxCollider.position.set(this.position.x,this.position.y);
-        if(GameObjectManager.instance.checkCollision(this) !=null)
+        GameObject collider = GameObjectManager.instance.checkCollision(this);
+        if(collider !=null)
         {
-            GameObjectManager.instance.checkCollision(this).isAlive =false;
+            collider.isAlive =false;
             this.isAlive =false;
         }
         this.playerShoot.run(this);
@@ -46,5 +47,4 @@ public class Player extends GameObject {
 
 
 }
-
 
