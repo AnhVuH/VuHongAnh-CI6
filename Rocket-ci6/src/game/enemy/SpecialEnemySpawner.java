@@ -7,22 +7,21 @@ import base.GameObjectManager;
 import java.util.Random;
 
 public class SpecialEnemySpawner  extends GameObject {
-    FrameCounter frameCounter ;
+    private FrameCounter frameCounter ;
     Random random;
 
 
     public SpecialEnemySpawner(){
 
         this.random = new Random();
-        this.frameCounter = new FrameCounter(800);
+        this.frameCounter = new FrameCounter(1000);
     }
     @Override
     public  void run(){
         if(this.frameCounter.run()){
             super.run();
-            SpecialEnemy enemy =  new SpecialEnemy();
+            SpecialEnemy enemy = GameObjectManager.instance.recycle(SpecialEnemy.class);
             enemy.position.set(this.random.nextInt(1024),this.random.nextInt(600));
-            GameObjectManager.instance.add(enemy);
             this.frameCounter.reset();
         }
     }

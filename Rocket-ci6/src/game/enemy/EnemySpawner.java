@@ -8,22 +8,21 @@ import java.util.Random;
 
 public class EnemySpawner extends GameObject { //tan dung ham run cua base.GameObject
 
-    FrameCounter frameCounter ;
+    private FrameCounter frameCounter ;
     Random random;
 
 
     public EnemySpawner(){
 
         this.random = new Random();
-        this.frameCounter = new FrameCounter(300);
+        this.frameCounter = new FrameCounter(400);
     }
     @Override
     public  void run(){
         if(this.frameCounter.run()){
             super.run();
-            Enemy enemy = new Enemy();
+            Enemy enemy = GameObjectManager.instance.recycle(Enemy.class);
             enemy.position.set(this.random.nextInt(1024),this.random.nextInt(600));
-            GameObjectManager.instance.add(enemy);
             this.frameCounter.reset();
         }
     }

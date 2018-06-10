@@ -1,5 +1,7 @@
+import base.GameObject;
 import base.GameObjectManager;
 import game.background.Background;
+import game.effectObject.EffectObjectSpawner;
 import game.enemy.EnemySpawner;
 import game.enemy.SpecialEnemy;
 import game.enemy.SpecialEnemySpawner;
@@ -44,16 +46,20 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.add(new StarSpawner());
         GameObjectManager.instance.add(new EnemySpawner());
         GameObjectManager.instance.add(new SpecialEnemySpawner());
+
+        GameObjectManager.instance.add(new EffectObjectSpawner());
     }
 
 
 
     private  void setupPlayer(){
-        this.player = new Player();
+        this.player = GameObjectManager.instance.recycle(Player.class);
         this.player.position.set(500,300);
         this.player.playerMove.velocity.set(4,0);
-        GameObjectManager.instance.add(this.player);
+
     }
+
+
 
 
 
