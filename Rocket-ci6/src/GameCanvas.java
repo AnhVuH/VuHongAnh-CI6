@@ -1,9 +1,8 @@
-import base.GameObject;
 import base.GameObjectManager;
+import game.Particle;
 import game.background.Background;
-import game.effectObject.EffectObjectSpawner;
+import game.effect.EffectObjectSpawner;
 import game.enemy.EnemySpawner;
-import game.enemy.SpecialEnemy;
 import game.enemy.SpecialEnemySpawner;
 import game.player.Player;
 import game.star.StarSpawner;
@@ -22,6 +21,7 @@ public class GameCanvas extends JPanel {
     Graphics graphics;
 
     Player player;
+    Particle particle = new Particle();
 
     private Random random = new Random();
 
@@ -45,7 +45,7 @@ public class GameCanvas extends JPanel {
         this.setupPlayer();
         GameObjectManager.instance.add(new StarSpawner());
         GameObjectManager.instance.add(new EnemySpawner());
-        GameObjectManager.instance.add(new SpecialEnemySpawner());
+//        GameObjectManager.instance.add(new SpecialEnemySpawner());
 
         GameObjectManager.instance.add(new EffectObjectSpawner());
     }
@@ -58,8 +58,6 @@ public class GameCanvas extends JPanel {
         this.player.playerMove.velocity.set(4,0);
 
     }
-
-
 
 
 
@@ -79,8 +77,8 @@ public class GameCanvas extends JPanel {
 
     public void runAll(){
         GameObjectManager.instance.runAll();
+        this.particle.run(this.player);
         KeyboardInput.instance.reset();
-
 
     }
 

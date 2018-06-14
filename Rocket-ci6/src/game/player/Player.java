@@ -2,10 +2,11 @@ package game.player;
 
 import base.GameObject;
 
+import base.GameObjectManager;
 import base.Vector2D;
+import game.Particle;
 import game.bullet.BulletEnemy;
-import game.effectObject.EffectShield;
-import game.effectObject.EffectTripleShoot;
+import game.effect.*;
 import game.enemy.Enemy;
 import game.enemy.SpecialEnemy;
 import physic.BoxCollider;
@@ -23,6 +24,11 @@ public class Player extends GameObject implements PhysicBody {
     private PlayerShoot playerShoot;
 
     private RunHitObject runHitObject;
+    private CreateSmoke createSmoke;
+
+//    private Shield shield;
+
+    public boolean hitEnemy= false;
 
     private  int life;
 
@@ -45,7 +51,11 @@ public class Player extends GameObject implements PhysicBody {
                 EffectShield.class,
                 EffectTripleShoot.class);
         this.life =1;
+        this.createSmoke =new CreateSmoke();
         this.specialShoot = false;
+
+//        this.shield = new Shield();
+
     }
 
 
@@ -59,6 +69,8 @@ public class Player extends GameObject implements PhysicBody {
 
         ((PolygonRenderer)(this.renderer)).angle = this.playerMove.angle;
         this.runHitObject.run(this);
+        this.createSmoke.run(this);
+
     }
 
 
@@ -72,6 +84,9 @@ public class Player extends GameObject implements PhysicBody {
         if(gameObject instanceof Enemy || gameObject instanceof BulletEnemy || gameObject instanceof SpecialEnemy ){
             if(this.life==1){
                 this.isAlive = false;
+                if(gameObject instanceof Enemy ||gameObject instanceof SpecialEnemy){
+                    this.hitEnemy = true;
+                }
             }
             else{
                 this.life -=1;
@@ -79,6 +94,8 @@ public class Player extends GameObject implements PhysicBody {
         }
         if(gameObject instanceof EffectShield){
             this.life = 4;
+
+
         }
         if(gameObject instanceof EffectTripleShoot){
             this.specialShoot = true;

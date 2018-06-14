@@ -8,6 +8,7 @@ import physic.BoxCollider;
 import physic.PhysicBody;
 import renderer.ImageRenderer;
 
+import java.awt.*;
 
 
 public class BulletEnemy extends GameObject implements PhysicBody {
@@ -19,7 +20,7 @@ public class BulletEnemy extends GameObject implements PhysicBody {
     //constructor
     public BulletEnemy(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png",6,6);
+        this.renderer = new ImageRenderer("resources-rocket/resources/images/circle.png",6,6,Color.YELLOW);
         this.boxCollider = new BoxCollider(6,6);
 
     }

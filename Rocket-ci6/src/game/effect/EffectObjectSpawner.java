@@ -1,4 +1,4 @@
-package game.effectObject;
+package game.effect;
 
 import base.FrameCounter;
 import base.GameObject;
