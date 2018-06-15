@@ -18,7 +18,7 @@ public class Shield extends GameObject implements PhysicBody {
     public Vector2D velocity;
     public BoxCollider boxCollider;
     public RunHitObject runHitObject;
-    private int life = 3;
+    private int life ;
 
     public Shield(){
         this.velocity = new Vector2D();
@@ -26,6 +26,7 @@ public class Shield extends GameObject implements PhysicBody {
         this.runHitObject = new RunHitObject(Enemy.class,
                 BulletEnemy.class,
                 SpecialEnemy.class);
+        this.life = 3;
 
     }
 
@@ -36,7 +37,9 @@ public class Shield extends GameObject implements PhysicBody {
         if (player != null) {
             this.position.set(player.position);
         }
+        this.boxCollider.position.set(this.position.x-25, this.position.y-25 );
         this.runHitObject.run(this);
+
     }
 
 
@@ -47,10 +50,13 @@ public class Shield extends GameObject implements PhysicBody {
 
     @Override
     public void getHit(GameObject gameObject) {
-        this.life--;
+        if(gameObject instanceof Enemy || gameObject instanceof BulletEnemy || gameObject instanceof SpecialEnemy )
+         this.life--;
         System.out.println(this.life);
-        if(this.life==0)
-            this.isAlive =false;
+        if(this.life<=0) {
+            this.isAlive = false;
+            this.life = 3;
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import base.GameObject;
 import base.Vector2D;
 
 import game.bullet.BulletPlayer;
+import game.effect.Shield;
 import game.player.Player;
 import physic.BoxCollider;
 
@@ -60,7 +61,7 @@ public class SpecialEnemy extends Enemy {
 
     @Override
     public void getHit(GameObject gameObject) {
-        if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer || gameObject instanceof Shield){
             this.isAlive = false;
         }
 

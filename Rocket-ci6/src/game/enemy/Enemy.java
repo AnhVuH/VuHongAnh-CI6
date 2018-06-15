@@ -4,6 +4,7 @@ import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
 import game.bullet.BulletPlayer;
+import game.effect.Shield;
 import game.player.Player;
 import physic.BoxCollider;
 import physic.PhysicBody;
@@ -47,7 +48,7 @@ public class Enemy extends GameObject implements PhysicBody {
 
     @Override
     public void getHit(GameObject gameObject) {
-        if(gameObject instanceof Player || gameObject instanceof BulletPlayer){
+        if(gameObject instanceof Player || gameObject instanceof BulletPlayer|| gameObject instanceof Shield){
             this.isAlive = false;
         }
 
