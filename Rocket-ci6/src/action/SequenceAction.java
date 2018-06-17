@@ -23,9 +23,13 @@ public class SequenceAction implements Action {
                 return true;
             }else{
                 this.currentIndex +=1;
+
             }
         }
+
         return false;
+
+
     }
 
     @Override

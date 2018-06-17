@@ -86,6 +86,13 @@ public class GameObjectManager {
 
     }
 
+    public  <T extends GameObject> long countObjectAlive(Class<T> cls){
+        return this.list.stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .filter(gameObject -> cls.isInstance(gameObject))
+                .count();
+    }
+
     public void killObject(GameObject gameObject){
         if (gameObject.position.x <0 || gameObject.position.x >1024 || gameObject.position.y <0 ||gameObject.position.y >600){
             gameObject.isAlive = false;

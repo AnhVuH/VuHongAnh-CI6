@@ -16,7 +16,7 @@ public class EffectTripleShoot extends GameObject implements PhysicBody {
     public EffectTripleShoot(){
         this.boxCollider = new BoxCollider(30,30);
         this.renderer = new ImageRenderer("resources-rocket/resources/images/powerup_triple_shot.png", 30,30,Color.WHITE);
-        this.frameCounter = new FrameCounter(400);
+        this.frameCounter = new FrameCounter(500);
 
     }
     public void run(){

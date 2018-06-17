@@ -46,7 +46,7 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.add(new StarSpawner());
         GameObjectManager.instance.add(new EnemySpawner());
         GameObjectManager.instance.add(new SpecialEnemySpawner());
-
+//
         GameObjectManager.instance.add(new EffectObjectSpawner());
     }
 

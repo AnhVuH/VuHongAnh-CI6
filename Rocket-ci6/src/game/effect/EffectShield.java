@@ -15,7 +15,7 @@ public class EffectShield extends GameObject implements PhysicBody {
     public EffectShield(){
         this.boxCollider = new BoxCollider(30,30);
         this.renderer =new ImageRenderer("resources-rocket/resources/images/powerup_shield.png",30,30, Color.WHITE);
-        this.frameCounter = new FrameCounter(400);
+        this.frameCounter = new FrameCounter(500);
     }
     public void run(){
         this.boxCollider.position.set(this.position.x-15, this.position.y-15);

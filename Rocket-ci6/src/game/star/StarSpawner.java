@@ -53,7 +53,7 @@ public class StarSpawner extends GameObject {
         this.addAction(
                 new LimitAction(
                         new SequenceAction(
-                            new WaitAction(30),
+                            new WaitAction(50),
                             new ActionAdapter() {
                                 @Override
                                 public boolean run(GameObject owner) {
@@ -64,7 +64,7 @@ public class StarSpawner extends GameObject {
                             }
 
                         )
-                ,10)
+                ,60)
         );
 
     }
@@ -72,12 +72,7 @@ public class StarSpawner extends GameObject {
     @Override
     public void run(){
         super.run();
-//        if(this.frameCounter.run()){
-//            Star star = GameObjectManager.instance.recycle(Star.class);
-//            star.position.set(1024, random.nextInt(600));
-//            star.velocity.set(-(random.nextInt(2)+1),0);
-//            this.frameCounter.reset();
-//        }
+
 
     }
 }
