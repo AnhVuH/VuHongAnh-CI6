@@ -24,7 +24,7 @@ public class EnemySpawner extends GameObject { //tan dung ham run cua base.GameO
         this.addAction(
                 new LimitAction(
                         new SequenceAction(
-                                new WaitAction(250),
+                                new WaitAction(350),
                                 new ActionAdapter() {
                                     @Override
                                     public boolean run(GameObject owner) {

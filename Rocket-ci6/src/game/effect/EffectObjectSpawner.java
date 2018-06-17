@@ -24,7 +24,7 @@ public class EffectObjectSpawner extends GameObject {
     public void createAction(){
         this.addAction(
                 new SequenceAction(
-                        new WaitAction(800),
+                        new WaitAction(600),
                         new LimitAction(
                                 new SequenceAction(
                                         new ActionAdapter() {

@@ -21,7 +21,7 @@ public class SpecialEnemySpawner  extends GameObject {
     public void createAction(){
         this.addAction(
                 new SequenceAction(
-                        new WaitAction(1000),
+                        new WaitAction(1200),
                         new LimitAction(
                                 new SequenceAction(
                                         new ActionAdapter() {
