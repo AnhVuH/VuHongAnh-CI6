@@ -37,10 +37,8 @@ public class SpecialEnemySpawner  extends GameObject {
                                         return GameObjectManager.instance.countObjectAlive(SpecialEnemy.class)==0;
                                     }
                                 }
-
-
-                                ),
-                                5
+                                )
+                                , 5
                         )
                 )
         );

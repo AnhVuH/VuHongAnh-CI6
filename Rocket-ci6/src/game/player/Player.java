@@ -13,6 +13,8 @@ import physic.BoxCollider;
 import physic.PhysicBody;
 import physic.RunHitObject;
 import renderer.PolygonRenderer;
+import scene.GameOverScene;
+import scene.SceneManager;
 
 import java.awt.*;
 
@@ -25,6 +27,7 @@ public class Player extends GameObject implements PhysicBody {
 
     private RunHitObject runHitObject;
     private CreateSmoke createSmoke;
+    Particle particle = new Particle();
 
 
     public boolean hitEnemy= false;
@@ -77,6 +80,7 @@ public class Player extends GameObject implements PhysicBody {
     public void getHit(GameObject gameObject) {
         if(gameObject instanceof Enemy || gameObject instanceof BulletEnemy || gameObject instanceof SpecialEnemy ) {
             this.isAlive = false;
+            SceneManager.instance.changeScene(new GameOverScene());
             if (gameObject instanceof Enemy || gameObject instanceof SpecialEnemy) {
                 this.hitEnemy = true;
             }
